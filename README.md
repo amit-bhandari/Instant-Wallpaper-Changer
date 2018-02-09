@@ -2,6 +2,8 @@
 Quickly change wallpaper by typing couple words
 
 Ever came something/someone in mind and wanted to change your wallapaper according to mood?  What to do? 
+
+Do you do the following? If yes, you are in a luck.
 Go to goole -> search something -> find good photo -> download -> browse to directtory -> set wallpaper
 
 This script will does all that in couple words after setup.
