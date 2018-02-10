@@ -1,5 +1,5 @@
 # quick-wallpaper-changer-linux
-Quickly change wallpaper by typing couple words
+Quickly change wallpaper by typing couple words OR download all 100 HD latest wallpapers from google search by giving search term.
 
 Ever came something/someone in mind and wanted to change your wallapaper according to mood?  What to do? 
 
@@ -10,12 +10,12 @@ Go to goole -> search something -> find good photo -> download -> browse to dire
 This script will does all that in couple words after setup.
 
 # Steps to setup
-Download the script in desired location <br /> 
-Change PHOTO_PATH in script and mention path where you want photo to be downloaded. <br />
-Install any missing packages by "pip install <package_name>" <br /> 
-If you don't have pip, install pip. Instructions here --> https://www.saltycrane.com/blog/2010/02/how-install-pip-ubuntu/  <br />
-[optional] Copy the script in /usr/bin to get direct access from terminal. <br />
-Enjoy! <br />
+-> Download the script in desired location <br /> 
+-> Change PHOTO_PATH in script and mention path where you want photo to be downloaded. <br />
+-> Install any missing packages by "pip install <package_name>" <br /> 
+-> If you don't have pip, install pip. Instructions here --> https://www.saltycrane.com/blog/2010/02/how-install-pip-ubuntu/  <br />
+-> [optional] Copy the script in /usr/bin to get direct access from terminal. <br />
+-> Enjoy! <br />
 
 # Example usage - 
 
