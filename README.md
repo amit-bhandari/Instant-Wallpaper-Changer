@@ -9,6 +9,9 @@ Go to goole -> search something -> find good photo -> download -> browse to dire
 
 This script will does all that in couple words after setup.
 
+### Updated for Windows. 
+You can use changewall_windows.py to change wallpaper for Windows OS. Tested in Windows 10 64 bit. 
+
 # Steps to setup
 -> Download the script in desired location <br /> 
 -> Change PHOTO_PATH in script and mention path where you want photo to be downloaded. <br />
