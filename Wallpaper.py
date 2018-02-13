@@ -7,9 +7,7 @@ class Wallpaper:
 		if os.path.isfile(image_path) != True:
 			raise IOException("Provided image is invalid.")
 		if sysOs == 'windows':
-			import ctypes
-			SPI_SETDESKWALLPAPER = 20
-			ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_path , 0)
+			self.changeWallpaperWindows(image_path)
 			return True
 		elif sysOs == 'linux':
 			import os
@@ -17,6 +15,18 @@ class Wallpaper:
 			return True
 		else:
 			raise Exception("Platform is not supported yet!")
+
+	def isX64(self):
+		import struct
+		return struct.calcsize('P') * 8 == 64
+
+	def changeWallpaperWindows(self, image_path):
+		import ctypes
+		SPI_SETDESKWALLPAPER = 20
+		if self.isX64():
+			ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, image_path, 0)
+		else:
+			ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, image_path, 0)
 
 	def getOs(self):
 		return platform.system()
