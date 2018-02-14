@@ -12,26 +12,36 @@ import requests
 import subprocess
 import imghdr
 import Wallpaper
+import argparse
 
-if len(sys.argv)<2:
-	print("Provide Name.")
-	exit()
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--filepath", help="[Optional] Give file path to store wallpaper")
+parser.add_argument("-s", "--search_string", help="Give the search string")
+args = parser.parse_args()
 
-if len(sys.argv)>2:
-	print("Provide single argument only, if more than word, enclose in \"\"")
-	exit()
+#if file path given, use that, or else use the directory in which script is being run
+if args.filepath:
+    print "File path given"
+    PHOTO_PATH = args.filepath 
+else:
+    import os
+    PHOTO_PATH = os.path.dirname(os.path.abspath(__file__)) + "/photo.jpg"
+
+if args.search_string:
+    SEARCH_NAME = args.search_string
+else:
+    print "Give search string. Usage : changewall.py \"Search String\""
+    exit()
+
 
 #Replace search string with + in place of whitespace
-SEARCH_NAME = sys.argv[1]
 SEARCH_NAME +=" HD DESKTOP WALLPAPER"
 SEARCH_NAME = SEARCH_NAME.replace(' ','+')
+print(SEARCH_NAME)
 
 #prepare google search url
 SEARCH_URL = "https://www.google.co.in/search?q={}&source=lnms&tbm=isch&tbs=isz:ex,iszw:1920,iszh:1080".format(SEARCH_NAME)
 print(SEARCH_URL)
-
-#path for storing the photo
-PHOTO_PATH = 'D:\\Py\\WallpaperChangephoto.jpg'
 
 #manipulate user agent so as to make them believe we are just normal human downloading some image
 hdr = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
