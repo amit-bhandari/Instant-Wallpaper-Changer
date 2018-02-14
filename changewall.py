@@ -1,20 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
-import urllib2, urllib
+try:
+	from urllib.request import Request, urlopen  # Python 3
+except ImportError:
+	from urllib2 import Request, urlopen  # Python 2
 from bs4 import BeautifulSoup
 import json
 from random import randint
 import requests
 import subprocess
 import imghdr
+import Wallpaper
 
 if len(sys.argv)<2:
-	print "Provide Name."
+	print("Provide Name.")
 	exit()
 
 if len(sys.argv)>2:
-	print "Provide single argument only, if more than word, enclose in \"\""
+	print("Provide single argument only, if more than word, enclose in \"\"")
 	exit()
 
 #Replace search string with + in place of whitespace
@@ -24,20 +28,22 @@ SEARCH_NAME = SEARCH_NAME.replace(' ','+')
 
 #prepare google search url
 SEARCH_URL = "https://www.google.co.in/search?q={}&source=lnms&tbm=isch&tbs=isz:ex,iszw:1920,iszh:1080".format(SEARCH_NAME)
-print SEARCH_URL
+print(SEARCH_URL)
 
 #path for storing the photo
-PHOTO_PATH = '/home/amit/python/photo.jpg'
+PHOTO_PATH = 'D:\\Py\\WallpaperChangephoto.jpg'
 
 #manipulate user agent so as to make them believe we are just normal human downloading some image
 hdr = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 #make a request and get html in beautiful suop
-req = urllib2.Request(SEARCH_URL,headers=hdr)
-page = urllib2.urlopen(req)
+#req = urllib2.Request(SEARCH_URL,headers=hdr)
+req = Request(SEARCH_URL)
+req.add_header("User-Agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36");
+page = urlopen(req).read()
 soup = BeautifulSoup(page, 'html.parser')
 
-#print soup.prettify()
+#print(soup.prettify()
 
 #scrap the html to find link of image (just refer to html printed in above prettify line to find what html google returns)
 #google image will give us total 99 images (I think), just pick one randomly. And hope for the best.
@@ -47,7 +53,7 @@ while invalid_jpeg:
 	    data_content = json.loads(child)
 	    LINK = data_content["ou"]
 	     #dowload the photo 
-	    print LINK
+	    print(LINK)
 	 	 
 	 	
 	res = requests.get(LINK, headers=hdr)
@@ -60,6 +66,5 @@ while invalid_jpeg:
 
 
 #set as wallpaper
-#commands works for unity in my Ubuntu 16.04, might be different for your desktop. Just google it. P.S. Difficult if you are using KDE
-import os
-os.system("gsettings set org.gnome.desktop.background picture-uri file://" + PHOTO_PATH)
+wallpaper = Wallpaper.Wallpaper()
+wallpaper.change(PHOTO_PATH)
