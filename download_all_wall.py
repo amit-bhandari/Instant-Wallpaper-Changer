@@ -10,17 +10,41 @@ import subprocess
 import time
 import imghdr
 import os
+import argparse
 
-if len(sys.argv)<2:
-	print "Provide Name."
-	exit()
+parser = argparse.ArgumentParser()
+parser.add_argument("-f", "--filepath", help="[Optional] Give file path to store wallpaper")
+parser.add_argument("-s", "--search_string", help="Give the search string")
+parser.add_argument("-n", "--number_of_photos", help="Give the number of photos to be downloaded")
+args = parser.parse_args()
 
-if len(sys.argv)>2:
-	print "Provide single argument only, if more than word, enclose in \"\""
+#if file path given, use that, or else use the directory in which script is being run
+
+if args.search_string:
+    SEARCH_NAME = args.search_string
+else:
+    print ("Give search string. Usage : changewall.py \"Search String\"")
+    exit()
+
+if args.filepath:
+    print ("File path given")
+    DOWNLOAD_PATH = args.filepath 
+else:
+    import os
+    DOWNLOAD_PATH = os.path.dirname(os.path.abspath(__file__)) + "/wallpapers/{}".format(args.search_string)
+
+
+if args.number_of_photos:
+    if(int(args.number_of_photos)>99):
+	print("Number must be less than 99")
 	exit()
+    PHOTO_COUNT = int(args.number_of_photos)+1
+
+
+
+
 
 #Replace search string with + in place of whitespace
-SEARCH_NAME = sys.argv[1]
 SEARCH_NAME +=" HD DESKTOP WALLPAPER"
 SEARCH_NAME = SEARCH_NAME.replace(' ','+')
 
@@ -28,7 +52,6 @@ SEARCH_NAME = SEARCH_NAME.replace(' ','+')
 SEARCH_URL = "https://www.google.co.in/search?q={}&source=lnms&tbm=isch&tbs=isz:ex,iszw:1920,iszh:1080".format(SEARCH_NAME)
 print SEARCH_URL
 
-DOWNLOAD_PATH = "wallpaper/{}/".format(sys.argv[1])
 if not os.path.exists(DOWNLOAD_PATH):
     os.makedirs(DOWNLOAD_PATH)
 
@@ -48,10 +71,10 @@ soup = BeautifulSoup(page, 'html.parser')
 
 invalid_jpeg = True
 
-for i in range(99):
+for i in range(int(PHOTO_COUNT)):
 
 	#path for storing the photo
-	PHOTO_PATH = DOWNLOAD_PATH + '{}_{}.jpg'.format(sys.argv[1] ,str(i))
+	PHOTO_PATH = DOWNLOAD_PATH + '/{}_{}.jpg'.format(args.search_string ,str(i))
 
 	for child in soup.find("div", {"data-ri":"{}".format(str(i))}).find("div", {"class":"rg_meta"}).children:
 	    data_content = json.loads(child)
