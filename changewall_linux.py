@@ -30,7 +30,7 @@ else:
 if args.search_string:
     SEARCH_NAME = args.search_string
 else:
-    print "Give search string. Usage : changewall.py \"Search String\""
+    print "Give search string. Usage : changewall.py -s \"Search String\""
     exit()
 
 
