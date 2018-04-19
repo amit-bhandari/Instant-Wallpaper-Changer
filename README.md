@@ -22,8 +22,8 @@ You can use changewall_windows.py to change wallpaper for Windows OS. Tested in 
 
 # Example usage - 
 
-./changewall.py "Lamborghini" 
-./changewall.py "Kate Upton"
+./changewall.py -s "Lamborghini" 
+./changewall.py -s "Kate Upton"
 
 And you are done!
 
