@@ -31,12 +31,18 @@ class Wallpaper:
 			return True
 	 	elif sysOs == 'darwin':
 			import subprocess
+			import random
+			print(image_path)
+			temp_path=image_path+str(random.randint(1,1000)) 	#create a copy of image, if same image path is given everytime, dock does not refresh
+			os.popen('cp %s %s'%(image_path, temp_path))      
 			SCRIPT = """/usr/bin/osascript<<END
 			tell application "Finder"
 			set desktop picture to POSIX file "%s"
 			end tell
 			END"""
-			subprocess.Popen(SCRIPT%image_path, shell=True)
+			p1 = subprocess.Popen(SCRIPT%temp_path, shell=True)
+			p1.wait()
+			os.remove(temp_path) #delete temp file
         	else:
 			raise Exception("Platform is not supported yet!")
 

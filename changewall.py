@@ -41,8 +41,7 @@ if args.filepath:
     PHOTO_PATH = args.filepath 
 else:
     import os
-    PHOTO_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)) + "photo.jpg")
-
+    PHOTO_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "photo.jpg")
 if args.search_string:
     SEARCH_NAME = args.search_string
 else:
