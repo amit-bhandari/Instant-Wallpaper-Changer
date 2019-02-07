@@ -21,14 +21,23 @@ class Wallpaper:
 		import os.path
 		if os.path.isfile(image_path) != True:
 			raise IOException("Provided image is invalid.")
-		if sysOs == 'windows':
+		print("OS is " + sysOs)
+                if sysOs == 'windows':
 			self.changeWallpaperWindows(image_path)
 			return True
 		elif sysOs == 'linux':
 			import os
 			os.system("gsettings set org.gnome.desktop.background picture-uri file://" + image_path)
 			return True
-		else:
+	 	elif sysOs == 'darwin':
+			import subprocess
+			SCRIPT = """/usr/bin/osascript<<END
+			tell application "Finder"
+			set desktop picture to POSIX file "%s"
+			end tell
+			END"""
+			subprocess.Popen(SCRIPT%image_path, shell=True)
+        	else:
 			raise Exception("Platform is not supported yet!")
 
 	def isX64(self):
