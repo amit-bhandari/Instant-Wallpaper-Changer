@@ -15,7 +15,7 @@ You can use changewall_windows.py to change wallpaper for Windows OS. Tested in 
 # Steps to setup
 -> Download the script in desired location <br /> 
 -> Change PHOTO_PATH in script and mention path where you want photo to be downloaded. <br />
--> Install any missing packages by "pip install <package_name>" <br /> OR pip install -r requirements.txt
+-> Install any missing packages by "pip install <package_name>" OR pip install -r requirements.txt <br />
 -> If you don't have pip, install pip. Instructions here --> https://www.saltycrane.com/blog/2010/02/how-install-pip-ubuntu/  <br />
 -> [optional] Copy the script in /usr/bin to get direct access from terminal. <br />
 -> Enjoy! <br />
